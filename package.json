@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "A CLI Tool to bootstrap your javascript/typescript projects",
   "main": "build/index.js",
+  "bin": "build/index.js",
   "repository": "https://github.com/Ankan002/create-compile-me-app.git",
   "author": "Ankan Bhattacharya",
   "license": "MIT"
