@@ -12,10 +12,9 @@
     "dev": "nodemon",
     "build": "swc src -d build",
     "test": "jest --passWithNoTests",
-    "test-dev": "jest --passWithNoTests --setupFiles dotenv/config",
     "prepare": "husky install",
     "lint": "eslint",
-    "pre-commit": "yarn lint && yarn test-dev && yarn build",
+    "pre-commit": "yarn lint && yarn test && yarn build",
     "post-merge": "yarn install",
     "commit-msg": "npx --no-install commitlint --edit"
   },
