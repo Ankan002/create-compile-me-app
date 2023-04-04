@@ -9,15 +9,15 @@
   "license": "MIT",
   "scripts": {
     "start": "node build/index.js",
-		"dev": "nodemon",
+    "dev": "nodemon",
     "build": "swc src -d build",
     "test": "jest --passWithNoTests",
-		"test-dev": "jest --passWithNoTests --setupFiles dotenv/config",
+    "test-dev": "jest --passWithNoTests --setupFiles dotenv/config",
     "prepare": "husky install",
-		"lint": "eslint",
-		"pre-commit": "yarn lint && yarn test-dev && yarn build",
-		"post-merge": "yarn install",
-		"commit-msg": "npx --no-install commitlint --edit"
+    "lint": "eslint",
+    "pre-commit": "yarn lint && yarn test-dev && yarn build",
+    "post-merge": "yarn install",
+    "commit-msg": "npx --no-install commitlint --edit"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.5.1",
@@ -39,5 +39,9 @@
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.0.3"
+  },
+  "dependencies": {
+    "gradient-string": "^2.0.2",
+    "inquirer": "^9.1.5"
   }
 }
