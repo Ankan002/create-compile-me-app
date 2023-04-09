@@ -1,21 +1,16 @@
 import { printHeading } from "utils/print-heading";
-import { getInquirer } from "utils/get-inquirer";
+import { getTextInput } from "helpers/get-text-input";
 
 export const createProject = async () => {
 	printHeading();
 	console.log();
 	console.log();
 
-	const inquirer = await getInquirer.inquirerInstance();
+	const projectName = await getTextInput({
+		defaultAnswer: "something-amazing",
+		question: "Name your amazing project?",
+		key: "project-name",
+	});
 
-	const data = await inquirer.prompt([
-		{
-			type: "input",
-			message: "What is your name?",
-			default: "Ankan",
-			name: "name",
-		},
-	]);
-
-	console.log(data.name);
+	console.log(projectName);
 };
