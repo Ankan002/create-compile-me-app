@@ -1,16 +1,40 @@
 import { printHeading } from "utils/print-heading";
 import { getTextInput } from "helpers/get-text-input";
+import gradient from "gradient-string";
+import { validateProjectName } from "helpers/validate-project-name";
 
 export const createProject = async () => {
 	printHeading();
 	console.log();
 	console.log();
 
-	const projectName = await getTextInput({
-		defaultAnswer: "something-amazing",
-		question: "Name your amazing project?",
-		key: "project-name",
-	});
+	try {
+		let projectName = await getTextInput({
+			defaultAnswer: "something-amazing",
+			question: "Name your amazing project?",
+			key: "project-name",
+		});
 
-	console.log(projectName);
+		const projectValidationResponse = validateProjectName(projectName);
+
+		if (!projectValidationResponse.success) {
+			throw new Error(projectValidationResponse.error);
+		}
+
+		projectName = projectValidationResponse.validName;
+
+		console.log(projectName);
+	} catch (error) {
+		const errorColor = gradient(["#F15A59", "#ED2B2A"]);
+
+		if (error instanceof Error) {
+			console.log(errorColor(`Error: ${error.message}`));
+			console.log(errorColor("❌❌ Process exited with error code 1... ❌❌"));
+			process.exit();
+		}
+
+		console.log(errorColor(`Error: Some Error Occurred!!`));
+		console.log(errorColor("❌❌ Process exited with error code 1... ❌❌"));
+		process.exit();
+	}
 };
