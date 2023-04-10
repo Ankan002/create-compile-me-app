@@ -3,6 +3,7 @@ import { getTextInput } from "helpers/get-text-input";
 import gradient from "gradient-string";
 import { validateProjectName } from "helpers/validate-project-name";
 import { validateEmail } from "helpers/validate-email";
+import { getChoiceResult } from "helpers/get-choice-result";
 
 export const createProject = async () => {
 	printHeading();
@@ -36,8 +37,15 @@ export const createProject = async () => {
 			throw new Error("Enter a valid email id!!");
 		}
 
+		const domain = await getChoiceResult({
+			question: "Choose a project domain?",
+			options: ["backend", "frontend"],
+			key: "domain",
+		});
+
 		console.log(projectName);
 		console.log(emailId);
+		console.log(domain);
 	} catch (error) {
 		const errorColor = gradient(["#F15A59", "#ED2B2A"]);
 
