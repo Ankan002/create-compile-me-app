@@ -11,7 +11,7 @@ export const createProject = async () => {
 	try {
 		let projectName = await getTextInput({
 			defaultAnswer: "something-amazing",
-			question: "Name your amazing project?",
+			question: "Name your amazing project: ",
 			key: "project-name",
 		});
 
@@ -23,7 +23,14 @@ export const createProject = async () => {
 
 		projectName = projectValidationResponse.validName;
 
+		const emailId = await getTextInput({
+			question: "Enter your email id: ",
+			key: "email",
+			defaultAnswer: "ankanbhattacharya89@gmail.com",
+		});
+
 		console.log(projectName);
+		console.log(emailId);
 	} catch (error) {
 		const errorColor = gradient(["#F15A59", "#ED2B2A"]);
 
