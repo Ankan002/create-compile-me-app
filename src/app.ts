@@ -2,6 +2,7 @@ import { printHeading } from "utils/print-heading";
 import { getTextInput } from "helpers/get-text-input";
 import gradient from "gradient-string";
 import { validateProjectName } from "helpers/validate-project-name";
+import { validateEmail } from "helpers/validate-email";
 
 export const createProject = async () => {
 	printHeading();
@@ -23,11 +24,17 @@ export const createProject = async () => {
 
 		projectName = projectValidationResponse.validName;
 
-		const emailId = await getTextInput({
-			question: "Enter your email id: ",
-			key: "email",
-			defaultAnswer: "ankanbhattacharya89@gmail.com",
-		});
+		const emailId = (
+			await getTextInput({
+				question: "Enter your email id: ",
+				key: "email",
+				defaultAnswer: "ankanbhattacharya89@gmail.com",
+			})
+		).trim();
+
+		if (!validateEmail(emailId)) {
+			throw new Error("Enter a valid email id!!");
+		}
 
 		console.log(projectName);
 		console.log(emailId);
