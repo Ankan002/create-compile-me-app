@@ -5,7 +5,7 @@ function App() {
 	const [count, setCount] = useState<number>(0);
 
 	return (
-		<main className="App">
+		<main>
 			<a href="https://create-compile-me-app.compile-me.com" target="_blank">
 				<img
 					src="https://res.cloudinary.com/exponents/image/upload/v1680626626/reamde-images/create-compile-me-app-readme-cover_eih0nr.png"

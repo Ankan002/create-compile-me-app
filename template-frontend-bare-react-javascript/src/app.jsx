@@ -5,7 +5,7 @@ function App() {
     const [count, setCount] = useState(0);
 
     return (
-        <main className="App">
+        <main>
             <a
                 href="https://create-compile-me-app.compile-me.com"
                 target="_blank"
