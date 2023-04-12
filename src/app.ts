@@ -1,9 +1,11 @@
+import gradient from "gradient-string";
+
 import { printHeading } from "utils/print-heading";
 import { getTextInput } from "helpers/get-text-input";
-import gradient from "gradient-string";
 import { validateProjectName } from "helpers/validate-project-name";
 import { validateEmail } from "helpers/validate-email";
 import { getChoiceResult } from "helpers/get-choice-result";
+import { getFrontendTemplate } from "helpers/questionare";
 
 export const createProject = async () => {
 	printHeading();
@@ -42,6 +44,18 @@ export const createProject = async () => {
 			options: ["backend", "frontend"],
 			key: "domain",
 		});
+
+		let templateArray = ["template"];
+
+		if (domain === "frontend") {
+			const frontendTemplateArray = await getFrontendTemplate();
+
+			templateArray = templateArray.concat(frontendTemplateArray);
+		}
+
+		const template = templateArray.join("-");
+
+		console.log(template);
 
 		console.log(projectName);
 		console.log(emailId);
