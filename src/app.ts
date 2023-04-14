@@ -6,6 +6,8 @@ import { validateProjectName } from "helpers/validate-project-name";
 import { validateEmail } from "helpers/validate-email";
 import { getChoiceResult } from "helpers/get-choice-result";
 import { getFrontendTemplate } from "helpers/questionare";
+import { executeShellCommand } from "helpers/execute-shell-command";
+import { parseNodeVersion } from "helpers/parse-node-version";
 
 export const createProject = async () => {
 	printHeading();
@@ -13,6 +15,16 @@ export const createProject = async () => {
 	console.log();
 
 	try {
+		const nodeVersion = await executeShellCommand({
+			command: "node -v",
+		});
+
+		const majorNodeVersion = parseNodeVersion({
+			version: nodeVersion,
+		});
+
+		if (majorNodeVersion < 16) throw new Error("Node version must be v16 or above");
+
 		let projectName = await getTextInput({
 			defaultAnswer: "something-amazing",
 			question: "Name your amazing project: ",
@@ -66,7 +78,7 @@ export const createProject = async () => {
 		if (error instanceof Error) {
 			console.log(errorColor(`Error: ${error.message}`));
 			console.log(errorColor("❌❌ Process exited with error code 1... ❌❌"));
-			process.exit();
+			process.exit(1);
 		}
 
 		console.log(errorColor(`Error: Some Error Occurred!!`));
