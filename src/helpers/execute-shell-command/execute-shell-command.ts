@@ -12,7 +12,7 @@ export const executeShellCommand = (args: ExecuteShellCommandArgs): Promise<stri
 			if (error) {
 				reject(error.message);
 			} else if (stderr) {
-				reject(stderr);
+				resolve("DONE!!");
 			}
 
 			resolve(stdout);

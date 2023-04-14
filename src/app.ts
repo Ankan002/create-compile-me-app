@@ -67,6 +67,23 @@ export const createProject = async () => {
 
 		const template = templateArray.join("-");
 
+		await executeShellCommand({
+			command:
+				"git clone --depth 1 --filter=blob:none --no-checkout https://github.com/Ankan002/create-compile-me-app.git .",
+		});
+
+		await executeShellCommand({
+			command: "git checkout main -- template-frontend-bare-react-javascript-recoil",
+		});
+
+		await executeShellCommand({
+			command: "rm -rf .git",
+		});
+
+		await executeShellCommand({
+			command: `mv template-frontend-bare-react-javascript-recoil ${projectName}`,
+		});
+
 		console.log(template);
 
 		console.log(projectName);
@@ -80,6 +97,8 @@ export const createProject = async () => {
 			console.log(errorColor("❌❌ Process exited with error code 1... ❌❌"));
 			process.exit(1);
 		}
+
+		console.log(error);
 
 		console.log(errorColor(`Error: Some Error Occurred!!`));
 		console.log(errorColor("❌❌ Process exited with error code 1... ❌❌"));
