@@ -67,22 +67,28 @@ export const createProject = async () => {
 
 		const template = templateArray.join("-");
 
-		await executeShellCommand({
-			command:
-				"git clone --depth 1 --filter=blob:none --no-checkout https://github.com/Ankan002/create-compile-me-app.git .",
+		const res = await executeShellCommand({
+			command: "ls",
 		});
 
-		await executeShellCommand({
-			command: "git checkout main -- template-frontend-bare-react-javascript-recoil",
-		});
+		console.log(res);
 
-		await executeShellCommand({
-			command: "rm -rf .git",
-		});
+		// await executeShellCommand({
+		// 	command:
+		// 		"git clone --depth 1 --filter=blob:none --no-checkout https://github.com/Ankan002/create-compile-me-app.git .",
+		// });
 
-		await executeShellCommand({
-			command: `mv template-frontend-bare-react-javascript-recoil ${projectName}`,
-		});
+		// await executeShellCommand({
+		// 	command: "git checkout main -- template-frontend-bare-react-javascript-recoil",
+		// });
+
+		// await executeShellCommand({
+		// 	command: "rm -rf .git",
+		// });
+
+		// await executeShellCommand({
+		// 	command: `mv template-frontend-bare-react-javascript-recoil ${projectName}`,
+		// });
 
 		console.log(template);
 
