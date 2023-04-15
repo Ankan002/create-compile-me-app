@@ -54,7 +54,7 @@ export const createProject = async () => {
 
 		const domain = await getChoiceResult({
 			question: "Choose a project domain?",
-			options: ["backend", "frontend"],
+			options: ["frontend"],
 			key: "domain",
 		});
 
@@ -66,6 +66,12 @@ export const createProject = async () => {
 			templateArray = templateArray.concat(frontendTemplateArray);
 		}
 
+		const pkgManager = await getChoiceResult({
+			key: "pkg-manager",
+			question: "Choose a package manager to install the dependencies?",
+			options: ["yarn", "npm", "none"],
+		});
+
 		console.log();
 
 		const template = templateArray.join("-");
@@ -76,18 +82,30 @@ export const createProject = async () => {
 			command: `mkdir ${projectName}`,
 		});
 
-		process.stdout.write("Downloading Template...\r\x1b");
+		process.stdout.write("⌛ Downloading Template...\r\x1b");
 
 		await executeShellCommand({
 			command: `cd ${projectName} && git clone -b main ${gitDownloadUrl} .`,
 		});
 
 		// Prependeing a garbage value just to avaoid the first letter getting deleted due to escape sequences.
-		process.stdout.write("tTemplate Downloaded...\n");
+		process.stdout.write("t✅ Template Downloaded...\n");
 
 		await executeShellCommand({
 			command: `cd ${projectName} && npm pkg set name=${projectName} && rm -rf .git yarn.lock package-lock.json`,
 		});
+
+		if (pkgManager !== "none") {
+			process.stdout.write("⌛ Installing required dependencies...\r\x1b");
+
+			const res = await executeShellCommand({
+				command: `cd ${projectName} && ${pkgManager === "npm" ? "npm i" : "yarn"}`,
+			});
+
+			process.stdout.write("t✅ Installed all required dependencies...\n");
+
+			console.log(res);
+		}
 
 		console.log(projectName);
 		console.log(emailId);
