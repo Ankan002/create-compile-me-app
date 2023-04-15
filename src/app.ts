@@ -8,6 +8,7 @@ import { getChoiceResult } from "helpers/get-choice-result";
 import { getFrontendTemplate } from "helpers/questionare";
 import { executeShellCommand } from "helpers/execute-shell-command";
 import { parseNodeVersion } from "helpers/parse-node-version";
+import { getGitUrl } from "helpers/get-git-url";
 
 export const createProject = async () => {
 	printHeading();
@@ -67,30 +68,9 @@ export const createProject = async () => {
 
 		const template = templateArray.join("-");
 
-		const res = await executeShellCommand({
-			command: "ls",
-		});
+		const gitDownloadUrl = getGitUrl(template);
 
-		console.log(res);
-
-		// await executeShellCommand({
-		// 	command:
-		// 		"git clone --depth 1 --filter=blob:none --no-checkout https://github.com/Ankan002/create-compile-me-app.git .",
-		// });
-
-		// await executeShellCommand({
-		// 	command: "git checkout main -- template-frontend-bare-react-javascript-recoil",
-		// });
-
-		// await executeShellCommand({
-		// 	command: "rm -rf .git",
-		// });
-
-		// await executeShellCommand({
-		// 	command: `mv template-frontend-bare-react-javascript-recoil ${projectName}`,
-		// });
-
-		console.log(template);
+		console.log(gitDownloadUrl);
 
 		console.log(projectName);
 		console.log(emailId);
