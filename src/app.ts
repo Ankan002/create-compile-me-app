@@ -66,11 +66,28 @@ export const createProject = async () => {
 			templateArray = templateArray.concat(frontendTemplateArray);
 		}
 
+		console.log();
+
 		const template = templateArray.join("-");
 
 		const gitDownloadUrl = getGitUrl(template);
 
-		console.log(gitDownloadUrl);
+		await executeShellCommand({
+			command: `mkdir ${projectName}`,
+		});
+
+		process.stdout.write("Downloading Template...\r\x1b");
+
+		await executeShellCommand({
+			command: `cd ${projectName} && git clone -b main ${gitDownloadUrl} .`,
+		});
+
+		// Prependeing a garbage value just to avaoid the first letter getting deleted due to escape sequences.
+		process.stdout.write("tTemplate Downloaded...\n");
+
+		await executeShellCommand({
+			command: `cd ${projectName} && npm pkg set name=${projectName} && rm -rf .git yarn.lock package-lock.json`,
+		});
 
 		console.log(projectName);
 		console.log(emailId);
