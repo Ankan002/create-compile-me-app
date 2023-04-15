@@ -9,6 +9,7 @@ import { getFrontendTemplate } from "helpers/questionare";
 import { executeShellCommand } from "helpers/execute-shell-command";
 import { parseNodeVersion } from "helpers/parse-node-version";
 import { getGitUrl } from "helpers/get-git-url";
+import { getConfirmation } from "helpers/get-confirmation";
 
 export const createProject = async () => {
 	printHeading();
@@ -72,6 +73,11 @@ export const createProject = async () => {
 			options: ["yarn", "npm", "none"],
 		});
 
+		const shoulGitBeInitialized = await getConfirmation({
+			key: "git-initilization-confirmation",
+			question: "Should we initialize a Git Repository on your behalf?",
+		});
+
 		console.log();
 
 		const template = templateArray.join("-");
@@ -105,6 +111,16 @@ export const createProject = async () => {
 			process.stdout.write("t✅ Installed all required dependencies...\n");
 		}
 
+		if (shoulGitBeInitialized) {
+			process.stdout.write("⌛ Initializing Git...\r\x1b");
+
+			await executeShellCommand({
+				command: `cd ${projectName} && git init -b main && git add . && git commit -m "chore: :tada: project initialized"`,
+			});
+
+			process.stdout.write("t✅ Git Repository Initialized...\n");
+		}
+
 		console.log();
 		console.log(`✨✨ Your ${projectName} project has been created`);
 
@@ -115,7 +131,7 @@ export const createProject = async () => {
 				pkgManager !== "none" ? "and" : ""
 			},`
 		);
-		console.log(`${pkgManager !== "none"} && ${pkgManager} <"start | run dev"> as required!!`);
+		console.log(`${pkgManager !== "none" ? "&& ${pkgManager} <'start | run dev'> as required!!" : ""} `);
 
 		console.log();
 		console.log("📖 For docs visit: https://create-compile-me-app.compile-me.com");
