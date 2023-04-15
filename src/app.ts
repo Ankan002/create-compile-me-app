@@ -98,18 +98,27 @@ export const createProject = async () => {
 		if (pkgManager !== "none") {
 			process.stdout.write("⌛ Installing required dependencies...\r\x1b");
 
-			const res = await executeShellCommand({
+			await executeShellCommand({
 				command: `cd ${projectName} && ${pkgManager === "npm" ? "npm i" : "yarn"}`,
 			});
 
 			process.stdout.write("t✅ Installed all required dependencies...\n");
-
-			console.log(res);
 		}
 
-		console.log(projectName);
-		console.log(emailId);
-		console.log(domain);
+		console.log();
+		console.log(`✨✨ Your ${projectName} project has been created`);
+
+		console.log();
+		console.log(`▶ Just run:`);
+		console.log(
+			`cd ${projectName} to change the current directory to project directory ${
+				pkgManager !== "none" ? "and" : ""
+			},`
+		);
+		console.log(`${pkgManager !== "none"} && ${pkgManager} <"start | run dev"> as required!!`);
+
+		console.log();
+		console.log("📖 For docs visit: https://create-compile-me-app.compile-me.com");
 	} catch (error) {
 		const errorColor = gradient(["#F15A59", "#ED2B2A"]);
 
