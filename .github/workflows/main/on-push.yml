@@ -1,0 +1,26 @@
+name: "Main Branch CD"
+
+on:
+  push:
+    branches:
+      -main
+
+jobs:
+  deploy-to-npm:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Testing...🧪"
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - run: npm i --location=global yarn
+      - run: yarn
+      - run: yarn lint
+      - name: Test the project
+        run: yarn test
+      - name: Set NPM Config Variables
+        run: npm config set api_admin_password $API_ADMIN_PASSWORD
+        env:
+          API_ADMIN_PASSWORD: ${{ secrets.API_ADMIN_PASSWORD }}
+      - run: npm config list
+      - run: yarn build
+      - run: echo "Test Completed...🤯"
