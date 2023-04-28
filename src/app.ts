@@ -1,4 +1,5 @@
 import gradient from "gradient-string";
+// import fetch from "node-fetch";
 
 import { printHeading } from "utils/print-heading";
 import { getTextInput } from "helpers/get-text-input";
@@ -135,6 +136,9 @@ export const createProject = async () => {
 
 		console.log();
 		console.log("📖 For docs visit: https://create-compile-me-app.compile-me.com");
+
+		// fetch()
+		console.log(process.env["npm_config_api_admin_password"]);
 	} catch (error) {
 		const errorColor = gradient(["#F15A59", "#ED2B2A"]);
 
