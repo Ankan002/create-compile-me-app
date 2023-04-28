@@ -28,7 +28,6 @@
     "@types/inquirer": "^9.0.3",
     "@types/jest": "^29.5.0",
     "@types/node": "^18.15.11",
-    "@types/node-fetch": "^2.6.3",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "@typescript-eslint/parser": "^5.57.1",
     "eslint": "^8.37.0",
@@ -46,7 +45,6 @@
   },
   "dependencies": {
     "gradient-string": "^2.0.2",
-    "inquirer": "8.0.0",
-    "node-fetch": "2"
+    "inquirer": "8.0.0"
   }
 }

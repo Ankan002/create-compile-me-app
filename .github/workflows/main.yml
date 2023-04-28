@@ -9,7 +9,7 @@ jobs:
   deploy-to-npm:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Testing...🧪"
+      - run: echo "Publishing...🧪"
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
@@ -20,13 +20,9 @@ jobs:
       - run: yarn lint
       - name: Test the project
         run: yarn test
-      - run: touch .npmrc
-      - run: npm -v
-      - name: Set NPM Config Variables
-        shell: bash
-        run: sudo -E npm config set api_admin_password "1l^oa##6akkmn%3na**" 
-        env:
-          API_ADMIN_PASSWORD: ${{ secrets.API_ADMIN_PASSWORD }}
-      - run: npm config list
       - run: yarn build
-      - run: echo "Test Completed...🤯"
+      - name: Publish Package
+        run: npm publish 
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: echo "Published...🤯"
