@@ -14,8 +14,10 @@
     "test": "jest --passWithNoTests",
     "prepare": "husky install",
     "lint": "eslint",
-    "pre-commit": "yarn lint && yarn test && yarn build && npm version patch",
+    "pre-commit": "yarn lint && yarn test && yarn build",
+    "post-commit": "npm version patch",
     "post-merge": "yarn install",
+    "pre-push": "npm version patch",
     "commit-msg": "npx --no-install commitlint --edit"
   },
   "devDependencies": {
