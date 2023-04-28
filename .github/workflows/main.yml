@@ -3,7 +3,7 @@ name: "Main Branch CD"
 on:
   push:
     branches:
-      -main
+      - main
 
 jobs:
   deploy-to-npm:
