@@ -17,10 +17,7 @@
     "update-version": "npm version patch",
     "pre-commit": "yarn lint && yarn test && yarn build",
     "post-merge": "yarn install",
-    "commit-msg": "npx --no-install commitlint --edit",
-    "release:major": "npm version $(semver $npm_package_version -i major)",
-    "release:minor": "npm version $(semver $npm_package_version -i minor)",
-    "release:patch": "npm version $(semver $npm_package_version -i patch)"
+    "commit-msg": "npx --no-install commitlint --edit"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.5.1",
