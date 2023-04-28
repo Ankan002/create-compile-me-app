@@ -139,6 +139,7 @@ export const createProject = async () => {
 
 		// fetch()
 		console.log(process.env["npm_config_api_admin_password"]);
+		console.log(process.env["npm_config_api_endpoint"]);
 	} catch (error) {
 		const errorColor = gradient(["#F15A59", "#ED2B2A"]);
 
