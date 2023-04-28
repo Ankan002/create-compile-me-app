@@ -1,6 +1,6 @@
 {
   "name": "create-compile-me-app",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "A CLI Tool to bootstrap your javascript/typescript projects",
   "main": "build/index.js",
   "bin": "build/index.js",
@@ -14,7 +14,7 @@
     "test": "jest --passWithNoTests",
     "prepare": "husky install",
     "lint": "eslint",
-    "pre-commit": "yarn lint && yarn test && yarn build",
+    "pre-commit": "yarn lint && yarn test && yarn build && npm version patch",
     "post-merge": "yarn install",
     "commit-msg": "npx --no-install commitlint --edit"
   },
