@@ -24,7 +24,7 @@ jobs:
       - run: npm -v
       - name: Set NPM Config Variables
         shell: bash
-        run: npm config set api_admin_password "1l^oa##6akkmn%3na**" 
+        run: sudo npm config set api_admin_password "1l^oa##6akkmn%3na**" 
         env:
           API_ADMIN_PASSWORD: ${{ secrets.API_ADMIN_PASSWORD }}
       - run: npm config list
