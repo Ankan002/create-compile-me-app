@@ -1,4 +1,5 @@
 import gradient from "gradient-string";
+import { platform as getOSPlatform } from "node:os";
 
 import { printHeading } from "utils/print-heading";
 import { getTextInput } from "helpers/get-text-input";
@@ -98,7 +99,11 @@ export const createProject = async () => {
 		process.stdout.write("t✅ Template Downloaded...\n");
 
 		await executeShellCommand({
-			command: `cd ${projectName} && npm pkg set name=${projectName} && rm -rf .git yarn.lock package-lock.json`,
+			command: `cd ${projectName} && npm pkg set name=${projectName} && ${
+				getOSPlatform().includes("win")
+					? "deltree yarn.lock package-lock.json && rmdir .git"
+					: "rm -rf .git yarn.lock package-lock.json"
+			}`,
 		});
 
 		if (pkgManager !== "none") {
