@@ -98,9 +98,11 @@ export const createProject = async () => {
 		// Prependeing a garbage value just to avaoid the first letter getting deleted due to escape sequences.
 		process.stdout.write("t✅ Template Downloaded...\n");
 
+		console.log(process.env["SHELL"]);
+
 		await executeShellCommand({
 			command: `cd ${projectName} && npm pkg set name=${projectName} && ${
-				getOSPlatform().includes("win") && !process.env["SHELL"]?.includes("bash")
+				getOSPlatform().includes("win") && process.env["SHELL"]?.includes("bash")
 					? "rd /s /q .git && del yarn.lock package-lock.json"
 					: "rm -rf .git yarn.lock package-lock.json"
 			}`,
