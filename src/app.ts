@@ -98,7 +98,7 @@ export const createProject = async () => {
 		// Prependeing a garbage value just to avaoid the first letter getting deleted due to escape sequences.
 		process.stdout.write("t✅ Template Downloaded...\n");
 
-		console.log(process.env["SHELL"]);
+		console.log(!process.env["SHELL"]?.includes("bash"));
 
 		await executeShellCommand({
 			command: `cd ${projectName} && npm pkg set name=${projectName} && ${
