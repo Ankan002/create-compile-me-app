@@ -100,7 +100,7 @@ export const createProject = async () => {
 
 		await executeShellCommand({
 			command: `cd ${projectName} && npm pkg set name=${projectName} && ${
-				getOSPlatform().includes("win")
+				getOSPlatform().includes("win") && !process.env["SHELL"]?.includes("bash")
 					? "rd /s /q .git && del yarn.lock package-lock.json"
 					: "rm -rf .git yarn.lock package-lock.json"
 			}`,
