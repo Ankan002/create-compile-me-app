@@ -1,6 +1,6 @@
 {
   "name": "create-compile-me-app",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A CLI Tool to bootstrap your javascript/typescript projects",
   "main": "build/index.js",
   "bin": "build/index.js",
